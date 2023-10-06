@@ -1,0 +1,24 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.MemberDto
+
+<h1>Delete</h1>
+<h4>Member</h4>
+
+<form asp-action="Delete">
+    <div class="form-group">
+        <label asp-for="Id">Choose the Surname of the one you want to delete</label>
+        <select asp-for="Id" class="form-control">
+            <option value="@Model.Id">@Model.Surname</option>
+
+            @foreach (var member in ViewBag.Members)
+            {
+                if (member.Id != Model.Id)
+                {
+                    <option value="@member.Id">@member.Surname</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>

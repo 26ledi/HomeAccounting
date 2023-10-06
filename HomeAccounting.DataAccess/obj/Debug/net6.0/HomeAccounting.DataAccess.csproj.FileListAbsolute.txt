@@ -1,0 +1,14 @@
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\bin\Debug\net6.0\HomeAccounting.DataAccess.deps.json
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\bin\Debug\net6.0\HomeAccounting.DataAccess.dll
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\bin\Debug\net6.0\HomeAccounting.DataAccess.pdb
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.AssemblyInfoInputs.cache
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.AssemblyInfo.cs
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.csproj.CoreCompileInputs.cache
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.dll
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\refint\HomeAccounting.DataAccess.dll
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.pdb
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\ref\HomeAccounting.DataAccess.dll
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.csproj.AssemblyReference.cache
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\bin\Debug\net6.0\HomeAccounting.DataAccess.runtimeconfig.json
+J:\СУБД\HomeAccounting\HomeAccounting.DataAccess\obj\Debug\net6.0\HomeAccounting.DataAccess.genruntimeconfig.cache

@@ -1,0 +1,15 @@
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\bin\Debug\net6.0\HomeAccounting.BusinessLogic.deps.json
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\bin\Debug\net6.0\HomeAccounting.BusinessLogic.dll
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\bin\Debug\net6.0\HomeAccounting.BusinessLogic.pdb
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.AssemblyInfoInputs.cache
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.AssemblyInfo.cs
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.csproj.CoreCompileInputs.cache
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.dll
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\refint\HomeAccounting.BusinessLogic.dll
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.pdb
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\ref\HomeAccounting.BusinessLogic.dll
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\bin\Debug\net6.0\HomeAccounting.DataAccess.dll
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\bin\Debug\net6.0\HomeAccounting.DataAccess.pdb
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.csproj.AssemblyReference.cache
+J:\СУБД\HomeAccounting\HomeAccounting.BusinessLogic\obj\Debug\net6.0\HomeAccounting.BusinessLogic.csproj.CopyComplete
