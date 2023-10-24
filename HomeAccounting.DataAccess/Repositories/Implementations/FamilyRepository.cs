@@ -19,34 +19,39 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
             _db = db;
         }
 
-        async Task<Family> IFamilyRepository.AddAsync(Family family)
+       public async Task<Family>AddAsync(Family family)
         {
             _db.Families.Add(family);
             await _db.SaveChangesAsync();
             return family;
         }
 
-        async Task<Family> IFamilyRepository.DeleteAsync(Family family)
+        public async Task<Family>DeleteAsync(Family family)
         {
             _db.Families.Remove(family);
             await _db.SaveChangesAsync();
             return family;
         }
 
-        async Task<List<Family>> IFamilyRepository.GetAllFamilyAsync()
+        public async Task<List<Family>>GetAllFamilyAsync()
         {
-            return await _db.Families.AsNoTracking().ToListAsync();
+            return await _db.Families.Include(f => f.FamilyMember).ThenInclude(f=>f.Incomes).AsNoTracking().ToListAsync();
+        }
+        public async Task<Family?>GetFamilyByNameAsync(string name)
+        {
+            return await _db.Families.AsNoTracking().FirstOrDefaultAsync(x => x.FamilyName == name);
         }
 
-        async Task<Family?> IFamilyRepository.GetFamilyByIdAsync(int id)
+       public async Task<Family?>GetFamilyByIdAsync(int id)
         {
-            return await _db.Families.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _db.Families.Include(f => f.FamilyMember).ThenInclude(f => f.Incomes).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        async Task<Family> IFamilyRepository.UpdateAsync(Family family)
+        public async Task<Family>UpdateAsync(Family family)
         {
             _db.Families.Update(family);
             await _db.SaveChangesAsync();
+
             return family;
         }
     }

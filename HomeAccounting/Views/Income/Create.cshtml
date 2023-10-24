@@ -1,0 +1,61 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.IncomeDto
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@inject ISourceIncomeService sourceIncomeService
+@inject IMemberService memberService
+
+<h1>Create</h1>
+<h4>Income</h4>
+<form asp-action="Create" method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Source of Income
+                    <select asp-for="SourceIncomeId">
+                        <option value="">Select IncomeSource</option>
+                        @foreach (var sourceincome in await sourceIncomeService.GetSourceIncomeAsync())
+                        {
+                           <option value="@sourceincome.Id">@sourceincome.Name</option>  
+                        }
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                     Enter Member
+                    <select asp-for="MemberId">
+                        <option value="">Select Member</option>
+                        @foreach (var member in await memberService.GetMemberDtoAsync())
+                        {
+                            <option value="@member.Id">@member.Surname</option>
+                        }
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter  Amount
+                    <input type="number" asp-for="Amount" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter Date
+                    <input type="date" asp-for="Date" />
+                </th>
+            </tr>
+
+        </thead>
+    </table>
+    <button type="submit" class="btn-blue">Submit</button>
+</form>
+<style>
+    .btn-blue {
+        background-color: midnightblue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>

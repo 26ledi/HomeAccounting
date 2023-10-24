@@ -10,12 +10,12 @@ namespace HomeAccounting.BusinessLogic.Dtos
     public class IncomeDto
     {
         public int Id { get; set; }
-        public int PersonId { get; set; }
-        public Member Person { get; set; }
+        public int MemberId { get; set; }
+        public Member Member { get; set; }
         public int SourceIncomeId { get; set; }
         public SourceIncome SourceIncome { get; set; }
         public string Name { get; set; }
         public double Amount { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; }
     }
 }

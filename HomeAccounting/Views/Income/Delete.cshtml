@@ -1,0 +1,32 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.IncomeDto
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@inject ISourceIncomeService sourceIncomeService
+@inject IMemberService memberService
+
+<h1>Delete</h1>
+<h4>Income</h4>
+<form asp-action="Delete" method="post">
+    <table>
+        <thead>    
+            <tr>
+                <th>
+                    Delete
+                    <select asp-for="Id">
+                        <option value="@Model.Id">@Model.Member.Surname</option>
+                    </select>
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <button type="submit" class="btn-blue">Submit</button>
+</form>
+<style>
+    .btn-blue {
+        background-color: darkred;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>

@@ -16,12 +16,52 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = J:\СУБД\HomeAccounting\HomeAccounting
 build_property._RazorSourceGeneratorDebug = 
 
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/Balance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XEJhbGFuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Income/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Income/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Income/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Income/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Member/Balance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXEJhbGFuY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Member/Create.cshtml]

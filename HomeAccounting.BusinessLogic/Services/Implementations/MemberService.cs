@@ -2,7 +2,6 @@
 using HomeAccounting.BusinessLogic.Dtos;
 using HomeAccounting.BusinessLogic.Exceptions;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
-using HomeAccounting.Data.Entities;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
 
 namespace HomeAccounting.BusinessLogic.Services.Implementations;
@@ -27,7 +26,7 @@ public class MemberService : IMemberService
             throw new AlreadyExistException("This member exists already");
         }
 
-        var memberReturned = await _memberRepository.AddAsync(_mapper.Map<Member>(member));
+        var memberReturned = await _memberRepository.AddAsync(_mapper.Map<Data.Entities.Member>(member));
 
         return _mapper.Map<MemberDto>(memberReturned);
     }
@@ -56,7 +55,7 @@ public class MemberService : IMemberService
         }
 
         _mapper.Map(member, memberLooked);
-         await _memberRepository.UpdateAsync(memberLooked);
+        await _memberRepository.UpdateAsync(memberLooked);
 
         return member;
     }
@@ -68,9 +67,9 @@ public class MemberService : IMemberService
         {
             throw new NotFoundException("This Member doesn't exist");
         }
-        var memberReturned=await _memberRepository.UpdateAsync(_mapper.Map<Member>(memberLooked));
+       
 
-        return _mapper.Map<MemberDto>(memberReturned);
+        return _mapper.Map<MemberDto>(memberLooked);
     }
 
     public async Task<List<MemberDto>> GetMemberDtoAsync()
@@ -85,86 +84,183 @@ public class MemberService : IMemberService
         return _mapper.Map<List<MemberDto>>(members);
     }
 
-    //Sum for a given time
-    private double CalculateIncomeMemberForGivenTimeAsync(Member member, DateTime startime, DateTime endtime)
+    /// <summary>
+    /// Function which calculate the sum of all the income for a given time
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="startTime"></param>
+    /// <param name="endTime"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
+    public async Task<double> CalculateIncomeGivingTimeAsync(int id, DateTime startTime, DateTime endTime)
     {
-        double income = 0;
-        foreach (var incomeRecord in member.Incomes)
-        {
-
-            if (incomeRecord.Date >= startime && incomeRecord.Date <= endtime)
-            {
-                income = income + incomeRecord.Amount;
-            }
-        }
-
-        return income;
-    }
-    //Sum for a month
-    public async Task<double> CalculateIncomeMemberForGivenMonthAsync(int memberId, int year, int month)
-    {
-        DateTime startTime = new DateTime(year, month, 1);
-        DateTime endTime = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-        var member = await _memberRepository.GetMemberByIdAsync(memberId);   
-        
-        if(member is null)
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+        if (memberLooked is null)
         {
             throw new NotFoundException("Member does not exist");
         }
+        double incomeTotal = 0;
+        foreach (var incomeRecord in memberLooked.Incomes)
+        {
+            if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
+            {
+                incomeTotal = incomeTotal + incomeRecord.Amount;
+            }
+        }
+        return incomeTotal;
 
-        return  CalculateIncomeMemberForGivenTimeAsync(member, startTime, endTime);
+    }
+    /// <summary>
+    /// Function which calculate the sum of all the income for a given month
+    /// </summary>
+    /// <param name="memberId"></param>
+    /// <param name="year"></param>
+    /// <param name="month"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
+    public async Task<double> CalculateIncomeForMonthAsync(int memberId, int year, int month)
+    {
+        DateTime startDate = new DateTime(year, month, 1);
+        var daysInMonth = DateTime.DaysInMonth(year, month);
+        DateTime endDate = new DateTime(year, month, daysInMonth);
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(memberId);
+        if (memberLooked is null)
+        {
+            throw new NotFoundException("Member does not exist");
+        }
+        double incomeTotal = 0;
+        foreach (var incomeRecord in memberLooked.Incomes)
+        {
+            if (incomeRecord.Date >= startDate && incomeRecord.Date <= endDate)
+            {
+                incomeTotal = incomeTotal + incomeRecord.Amount;
+            }
+        }
+        return incomeTotal;
     }
 
-    //Sum for a year
-    public async Task<double> CalculateIncomeMemberForGivenYearAsync(int id, int year)
+    /// <summary>
+    /// Function which calculate the sum of all the income for a given year
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="year"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
+    public async Task<double> CalculateIncomeMemberForYearAsync(int id, int year)
     {
         DateTime startTime = new DateTime(year, 1, 1);
         DateTime endTime = new DateTime(year, 12, 31);
-        var member = await _memberRepository.GetMemberByIdAsync(id);
-        if (member is null)
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+        if (memberLooked is null)
         {
             throw new NotFoundException("Member does not exist");
         }
 
-        return  CalculateIncomeMemberForGivenTimeAsync(member, startTime, endTime);
-    }
-    //Max for a given time 
-    private double GetHighestIncomeGivingTimeAsync(Member member, DateTime startime, DateTime endtime)
-    {
-        var incomesInPeriod = member.Incomes
-        .Where(income => income.Date >= startime && income.Date <= endtime)
-        .Select(income => income.Amount);
-        var highestIncome = incomesInPeriod.Max();
+        double incomeTotal = 0;
+        foreach (var incomeRecord in memberLooked.Incomes)
+        {
+            if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
+            {
+                incomeTotal = incomeTotal + incomeRecord.Amount;
 
-        return highestIncome;
+            }
+
+        }
+        return incomeTotal;
     }
+    /// <summary>
+    /// Function which is getting the highest income for a given time
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="startime"></param>
+    /// <param name="endtime"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
+    public async Task<double> GetHighestIncomeGivingTimeAsync(int id, DateTime startime, DateTime endtime)
+    {
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+        if (memberLooked is null)
+        {
+            throw new NotFoundException("This Member doesn't exists");
+        }
+        double currentVal;
+        double max = 0;
+        foreach (var highestIncome in memberLooked.Incomes)
+        {
+            if (highestIncome.Date >= startime && highestIncome.Date <= endtime)
+            {
+                currentVal = highestIncome.Amount;
+                if (currentVal>max)
+                {
+                    max = currentVal;
+                }
+            }
+        }
+        return max;
+    }
+    /// <summary>
+    ///Function which is getting the highest income for a given month
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="year"></param>
+    /// <param name="month"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
 
     public async Task<double> GetHighestIncomeMonthAsync(int id, int year, int month)
     {
         DateTime startTime = new DateTime(year, month, 1);
         DateTime endTime = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-        var member = await _memberRepository.GetMemberByIdAsync(id);
-        if (member is null)
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+        if (memberLooked is null)
         {
             throw new NotFoundException("Member does not exist");
         }
+        double max=0;
+        double currentVal;
+        foreach (var incomeRecord in memberLooked.Incomes)
+        {
+            if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
+            {
+                currentVal = incomeRecord.Amount;
+                if (currentVal > max) 
+                {
+                    max = currentVal;
+                }
+            }
+        }
+        return max;
 
-        return  GetHighestIncomeGivingTimeAsync(member, startTime, endTime);
     }
-
+    /// <summary>
+    /// Function which is getting the highest income for a year
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="year"></param>
+    /// <returns></returns>
+    /// <exception cref="NotFoundException"></exception>
     public async Task<double> GetHighestIncomeYearAsync(int id, int year)
     {
         DateTime startTime = new DateTime(year, 1, 1);
         DateTime endTime = new DateTime(year, 12, 31);
-        var member = await _memberRepository.GetMemberByIdAsync(id);
-        if (member is null)
+        var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+        if (memberLooked is null)
         {
-            throw new NotFoundException("Member does not exist");
+           throw new NotFoundException("Member does not exist");
         }
-
-        return GetHighestIncomeGivingTimeAsync(member, startTime, endTime);
+        double max = 0;
+        double currentVal;
+        foreach (var incomeRecord in memberLooked.Incomes)
+        {
+            if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
+            {
+                currentVal = incomeRecord.Amount;
+                if (currentVal > max)
+                {
+                    max = currentVal;
+                }
+            }
+        }
+        return max;
     }
-
-   
-
 }

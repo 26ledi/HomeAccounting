@@ -1,0 +1,81 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.MemberDto
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@inject IFamilyService familyService
+@inject IMemberService memberService
+
+<h4>Balance Sheet</h4>
+<form asp-action="Balance" method="post">
+ <table>
+     <thead>     
+         <tr>
+             <th>
+                 Name of Member
+                 <select asp-for="MemberId">
+                     <option value="">Select member</option>
+                     @foreach(var member in await memberService.GetMemberDtoAsync())
+                    {
+                        <option value="@member.Id">@member.Surname</option>
+                    }
+                </select>
+             </th>
+         </tr>
+         <tr>
+             <th>
+                 StartDate
+                <input type="date" asp-for="StartTime" />
+             </th>
+         </tr>
+            <tr>
+                <th>
+                    EndDate
+                    <input type="date" asp-for="EndTime" />
+                </th>
+            </tr>
+           
+     </thead>
+ </table>
+
+    
+    <input type="submit" value="Submit" class="btn-blue" />
+    @if (Model!=null)
+    { 
+        <p class="result">Income for a given time : @Model.Balance</p>
+        <p class="result">Income for a month(Month is found in the StartDate ) : @Model.BalanceIncomeMonth</p>
+        <p class="result">Income for a year : @Model.BalanceIncomeYear</p>
+        <p class="result">Highest Income for a given time : @Model.HighestIncomeTime</p>
+        <p class="result">Highest Income for a given month(Month is found in the StartDate ): @Model.HighestIncomeMonth</p>
+        <p class="result">Highest Income for a year : @Model.HighestIncomeYear</p>
+    }
+     
+</form>
+<style>
+    .btn-blue {
+        background-color:midnightblue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .no-income {
+        color: darkred;
+        font-weight: bold;
+    }
+
+    .result {
+        color: midnightblue;
+        font-weight: bold;
+    }
+</style>
+
+
+
+
+
+   
+
+
+
+
+

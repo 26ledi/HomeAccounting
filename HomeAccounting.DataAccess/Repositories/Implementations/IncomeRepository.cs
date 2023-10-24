@@ -17,34 +17,32 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
         {
             _db = db;
         }
-        async Task<Income> IIncomeRepository.AddIAsync(Income income)
+        public async Task<Income>AddAsync(Income income)
         {
             _db.Incomes.Add(income);
            await _db.SaveChangesAsync();
+
             return income;
-
         }
-
-        async Task<Income> IIncomeRepository.DeleteAsync(Income income)
+        public async Task<Income>DeleteAsync(Income income)
         {
             _db.Incomes.Remove(income);
             await _db.SaveChangesAsync();
-            return income;
-            
+
+            return income;  
         }
 
-        async Task<List<Income>>IIncomeRepository.GetAllIncomeAsync()
+        public async Task<List<Income>>GetAllIncomeAsync()
         {
-            return await _db.Incomes.AsNoTracking().ToListAsync();
+            return await _db.Incomes.AsNoTracking().Include(i => i.Member).ThenInclude(i => i.family).Include(i =>i.SourceIncome).ToListAsync();
         }
 
-        async Task<Income?> IIncomeRepository.GetIncomeByIdAsync(int id)
+        public async Task<Income?>GetIncomeByIdAsync(int id)
         {
-            return await _db.Incomes.FirstOrDefaultAsync(i=>i.Id==id);
+            return await _db.Incomes.AsNoTracking().Include(i => i.Member).ThenInclude(i => i.family).Include(i => i.SourceIncome).FirstOrDefaultAsync(i=>i.Id==id);
 
         }
-
-        async Task<Income> IIncomeRepository.UpdateAsync(Income income)
+        public async Task<Income>UpdateAsync(Income income)
         {
             _db.Incomes.Update(income);
             await _db.SaveChangesAsync();

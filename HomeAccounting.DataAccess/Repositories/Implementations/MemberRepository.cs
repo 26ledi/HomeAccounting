@@ -42,12 +42,12 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
 
         public async Task<List<Member>>GetMemberAsync()
         {
-            return await _db.Members.Include(m=>m.family).AsNoTracking().ToListAsync();
+            return await _db.Members.Include(m => m.family).Include(m => m.Incomes).AsNoTracking().ToListAsync();
         }
-
+     
         public async Task<Member?>GetMemberByIdAsync(int id)
         {
-            return await _db.Members.FirstOrDefaultAsync(i => i.Id == id);
+            return await _db.Members.Include(m => m.Incomes).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<Member>UpdateAsync(Member member)

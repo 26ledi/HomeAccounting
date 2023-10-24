@@ -15,6 +15,10 @@ builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IFamilyRepository, FamilyRepository>();
 builder.Services.AddScoped<IFamilyService, FamilyService>();
+builder.Services.AddScoped<IIncomeRepository, IncomeRepository>();
+builder.Services.AddScoped<IIncomeService, IncomeService>();
+builder.Services.AddScoped<ISourceIncomeRepository, SourceIncomeRepository>();
+builder.Services.AddScoped<ISourceIncomeService, SourceIncomeService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 

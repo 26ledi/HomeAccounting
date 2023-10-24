@@ -17,31 +17,31 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
         {
             _db = db;
         }
-        async Task<SourceIncome> ISourceIncomeRepository.AddAsync(SourceIncome sourceIncome)
+        public async Task<SourceIncome>AddAsync(SourceIncome sourceIncome)
         {
             _db.SourceIncomes.Add(sourceIncome);
             await _db.SaveChangesAsync();
             return sourceIncome;
         }
 
-        async Task<SourceIncome> ISourceIncomeRepository.DeleteAsync(SourceIncome sourceIncome)
+        public async Task<SourceIncome>DeleteAsync(SourceIncome sourceIncome)
         {
             _db.SourceIncomes.Remove(sourceIncome);
             await _db.SaveChangesAsync();
             return sourceIncome;
         }
 
-        async Task<List<SourceIncome>> ISourceIncomeRepository.GetAllSourceIncomeAsync()
+       public async Task<List<SourceIncome>>GetAllSourceIncomeAsync()
         {
             return await _db.SourceIncomes.AsNoTracking().ToListAsync();
         }
 
-        async Task<SourceIncome?> ISourceIncomeRepository.GetConsumptionTypeByIdAsync(int id)
+        public async Task<SourceIncome?>GetSourceIncomeByIdAsync(int id)
         {
             return await _db.SourceIncomes.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        async Task<SourceIncome> ISourceIncomeRepository.UpdateAsync(SourceIncome sourceIncome)
+        public async Task<SourceIncome>UpdateAsync(SourceIncome sourceIncome)
         {
             _db.SourceIncomes.Update(sourceIncome);
             await _db.SaveChangesAsync();

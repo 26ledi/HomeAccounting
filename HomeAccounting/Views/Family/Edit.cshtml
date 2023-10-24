@@ -1,0 +1,14 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.FamilyDto
+
+<h1>Edit</h1>
+<h4>Family</h4>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+       <label asp-for="FamilyName"></label>
+       <input asp-for="FamilyName" class="form-control" />
+       <span asp-validation-for="FamilyName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+ </form>
+

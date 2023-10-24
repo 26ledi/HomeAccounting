@@ -1,8 +1,6 @@
-﻿using AutoMapper.Configuration.Conventions;
-using HomeAccounting.BusinessLogic.Dtos;
+﻿using HomeAccounting.BusinessLogic.Dtos;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
 
 namespace HomeAccounting.Controllers
 {
@@ -17,37 +15,37 @@ namespace HomeAccounting.Controllers
         }
 
         //GET:Members
-        public async Task<IActionResult>Index()
+        public async Task<IActionResult> Index()
         {
             var members = await _memberService.GetMemberDtoAsync();
-            return View(members);  
+            return View(members);
         }
         [HttpGet]
-        public  async Task<IActionResult>Create() 
+        public async Task<IActionResult> Create()
         {
-            var families = await _familyService.GetAllFamilyAsync(); 
-            ViewBag.Families = families; 
+            var families = await _familyService.GetAllFamilyAsync();
+            ViewBag.Families = families;
 
             return View();
         }
         //POST:Members
         [HttpPost]
-        public async Task<IActionResult>Create(MemberDto member) 
+        public async Task<IActionResult> Create(MemberDto memberDto)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                await _memberService.AddAsync(member);
+                await _memberService.AddAsync(memberDto);
 
                 return RedirectToAction("Index", "Member");
             }
             var families = await _familyService.GetAllFamilyAsync();
             ViewBag.Families = families;
 
-            return View(member);
+            return View(memberDto);
         }
         //PUT:Members
         [HttpGet]
-        public async Task<IActionResult>Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var member = await _memberService.GetMemberByIdAsync(id);
             var members = await _memberService.GetMemberDtoAsync();
@@ -58,11 +56,11 @@ namespace HomeAccounting.Controllers
             return View(member);
         }
         [HttpPost]
-        public async Task<IActionResult>Edit(MemberDto member) 
+        public async Task<IActionResult> Edit(MemberDto memberDto)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                await _memberService.UpdateAsync(member);
+                await _memberService.UpdateAsync(memberDto);
                 return RedirectToAction("Index", "Member");
             }
             var members = await _memberService.GetMemberDtoAsync();
@@ -70,11 +68,11 @@ namespace HomeAccounting.Controllers
             var families = await _familyService.GetAllFamilyAsync();
             ViewBag.Families = families;
 
-            return View(member);
+            return View(memberDto);
         }
         //DELETE:Members
         [HttpGet]
-        public async Task<IActionResult>Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var member = await _memberService.GetMemberByIdAsync(id);
             var members = await _memberService.GetMemberDtoAsync();
@@ -83,14 +81,51 @@ namespace HomeAccounting.Controllers
             return View(member);
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(MemberDto member)
+        public async Task<IActionResult> Delete(MemberDto memberDto)
         {
-            await _memberService.DeleteAsync(member);
+            await _memberService.DeleteAsync(memberDto);
 
             var members = await _memberService.GetMemberDtoAsync();
             ViewBag.Members = members;
 
             return RedirectToAction("Index", "Member");
+        }
+
+        //Calculate Income by month(given month):Members
+        [HttpGet]
+        public IActionResult Balance()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Balance(MemberDto memberDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                double balanceGivingTime = await _memberService.CalculateIncomeGivingTimeAsync(memberDto.MemberId, memberDto.StartTime, memberDto.EndTime);
+                memberDto.Balance = balanceGivingTime;
+
+                DateTime firstDayOfMonth = new DateTime(memberDto.StartTime.Year, memberDto.StartTime.Month, 1);
+                double balanceMonth = await _memberService.CalculateIncomeForMonthAsync(memberDto.MemberId, firstDayOfMonth.Year, firstDayOfMonth.Month);
+                memberDto.BalanceIncomeMonth = balanceMonth;
+
+                DateTime firstDayOfYear = new DateTime(memberDto.StartTime.Year,1, 1);
+                double balanceYear = await _memberService.CalculateIncomeMemberForYearAsync(memberDto.MemberId, firstDayOfYear.Year);
+                memberDto.BalanceIncomeYear = balanceYear;
+
+                double highestIncomeGivingTime = await _memberService.GetHighestIncomeGivingTimeAsync(memberDto.MemberId, memberDto.StartTime, memberDto.EndTime);
+                memberDto.HighestIncomeTime = highestIncomeGivingTime;
+
+                DateTime DayOfMonth = new DateTime(memberDto.StartTime.Year, memberDto.StartTime.Month, 1);
+                double highestIncomeMonth = await _memberService.GetHighestIncomeMonthAsync(memberDto.MemberId,DayOfMonth.Year,DayOfMonth.Month);
+                memberDto.HighestIncomeMonth = highestIncomeMonth;
+
+                DateTime DayOfYear = new DateTime(memberDto.StartTime.Year,1, 1);
+                double highestIncomeYear = await _memberService.GetHighestIncomeYearAsync(memberDto.MemberId, DayOfYear.Year);
+                memberDto.HighestIncomeYear = highestIncomeYear;
+            }
+
+            return View(memberDto);
         }
 
     }

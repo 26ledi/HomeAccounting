@@ -1,0 +1,30 @@
+﻿@model List<HomeAccounting.BusinessLogic.Dtos.FamilyDto>
+
+<h1>Family's List</h1>
+
+<table>
+    <thead>
+
+        <tr>
+            <th>Number</th>
+            <th> Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)
+                <td>@Model[i].FamilyName</td>
+
+                <td>
+                    <a href="@Url.Action("Edit", "Family", new { id = Model[i].Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Family", new { id = Model[i].Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Create", "Family")" class="btn btn-primary">Create</a>
+<a href="@Url.Action("Balance", "Family")" class="btn btn-success">Balance</a>
+
