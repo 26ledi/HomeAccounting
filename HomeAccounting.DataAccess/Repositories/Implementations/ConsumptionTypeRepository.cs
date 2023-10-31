@@ -2,15 +2,10 @@
 using HomeAccounting.Data.Entities;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeAccounting.DataAccess.Repositories.Implementations
 {
-    public class ConsumptionTypeRepository:IConsumptionTypeRepository
+    public class ConsumptionTypeRepository : IConsumptionTypeRepository
     {
         private readonly DbContextHome _db;
         public ConsumptionTypeRepository(DbContextHome db)

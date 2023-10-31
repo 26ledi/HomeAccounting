@@ -1,21 +1,25 @@
 ﻿using HomeAccounting.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeAccounting.BusinessLogic.Dtos
 {
     public class ConsumptionDto
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int PersonId { get; set; }
-        public Member Person { get; set; }
+        public string ?Name { get; set; }
+        public int MemberId { get; set; }
+        public Member ?Member { get; set; }
         public int ConsumptionTypeId { get; set; }
-       public ConsumptionType ConsumptionType { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public ConsumptionType ?ConsumptionType { get; set; }
+        public DateTime Date { get; set; }
         public double Amount { get; set; }
+        public DateTime ?StartDate { get; set; }
+        public DateTime ?EndDate { get; set; }
+        public List<string> ?List { get; set; }
+        public List<string>? FrequentByMonthList { get; set; }
+        public List<string>? FrequentByYearList { get; set; }
+
+        public List<string>? FrequentMembersByTime { get; set; }
+        public List<string>? FrequentMembersByMonth { get; set; }
+        public List<string>? FrequentMembersByYear { get; set; }
     }
 }

@@ -1,0 +1,70 @@
+﻿@using HomeAccounting.BusinessLogic.Services.Interfaces;
+@model HomeAccounting.BusinessLogic.Dtos.ConsumptionDto;
+@inject IConsumptionService consumptionService;
+@inject IConsumptionTypeService consumptionTypeService;
+
+<h1>Create</h1>
+<h4>Consumption</h4>
+<form asp-action="Create" method="post">
+    <table>
+        <thead> 
+            <tr>
+                <th>
+                    Enter the cause of the consumption
+                    <input type="text" asp-for="Name"/>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter Member
+                    <select asp-for="MemberId">
+                        <option value="">Select Member</option>
+                        @foreach (var member in await consumptionService.GetAsync())
+                        {
+                            <option value="@member.Id">@member.Member.Surname</option>
+                        }
+                    </select>
+                </th>
+
+            </tr>
+            <tr>
+                <th>
+                    Enter ConsumptionType
+                    <select asp-for="ConsumptionTypeId">
+                        <option value="">Select ConsumptionType</option>
+                        @foreach (var consumptions in await consumptionTypeService.GetAsync())
+                        {
+                           
+                            <option value="@consumptions.Id">@consumptions.Name</option>
+                            
+                        }
+                    </select>
+                </th>
+
+            </tr>
+            <tr>
+                <th>
+                     Enter the date
+                    <input type="date" asp-for="Date" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                     Enter the amount
+                    <input type="number" asp-for="Amount"/>
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <button type="submit" class="btn-blue">Submit</button>
+</form>
+<style>
+    .btn-blue {
+        background-color: midnightblue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>

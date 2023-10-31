@@ -30,7 +30,6 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
             var familyReturned = await _familyRepository.AddAsync(_mapper.Map<Family>(familyDto));
 
             return _mapper.Map<FamilyDto>(familyReturned);
-
         }
 
         public async Task<FamilyDto> DeleteAsync(int id)

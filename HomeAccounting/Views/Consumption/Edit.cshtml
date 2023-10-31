@@ -1,0 +1,67 @@
+﻿@model HomeAccounting.BusinessLogic.Dtos.ConsumptionDto
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@inject IConsumptionTypeService consumptionTypeService;
+@inject IMemberService memberService;
+
+<h1>Edit</h1>
+<h4>Consumption</h4>
+<form asp-action="Edit" method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Enter the cause of the consumption
+                    <input type="text" asp-for="Name" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Source of Consumption
+                    <select asp-for="ConsumptionTypeId">
+                        <option value="">ConsumptionType</option>
+                        @foreach (var consumptionType in await consumptionTypeService.GetAsync())
+                        {
+                            <option value="@consumptionType.Id">@consumptionType.Name</option>
+                        }
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter Member
+                    <select asp-for="MemberId">
+                        <option value="">Select Member</option>
+                        @foreach (var member in await memberService.GetMemberDtoAsync())
+                        {
+                            <option value="@member.Id">@member.Surname</option>
+                        }
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter  Amount
+                    <input type="number" asp-for="Amount" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Enter Date
+                    <input type="date" asp-for="Date" />
+                </th>
+            </tr>
+
+        </thead>
+    </table>
+    <button type="submit" class="btn-blue">Submit</button>
+</form>
+<style>
+    .btn-blue {
+        background-color: midnightblue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>

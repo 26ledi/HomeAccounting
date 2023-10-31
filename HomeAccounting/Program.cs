@@ -19,9 +19,11 @@ builder.Services.AddScoped<IIncomeRepository, IncomeRepository>();
 builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<ISourceIncomeRepository, SourceIncomeRepository>();
 builder.Services.AddScoped<ISourceIncomeService, SourceIncomeService>();
+builder.Services.AddScoped<IConsumptionRepository,ConsumptionRepository>();
+builder.Services.AddScoped<IConsumptionService, ConsumptionService>();
+builder.Services.AddScoped<IConsumptionTypeRepository, ConsumptionTypeRepository>();
+builder.Services.AddScoped<IConsumptionTypeService, ConsumptionTypeService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

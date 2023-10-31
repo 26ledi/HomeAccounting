@@ -1,4 +1,5 @@
 ﻿using HomeAccounting.Data;
+using HomeAccounting.Data.Entities;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ public class ConsumptionRepository : IConsumptionRepository
         _db = db;
     }
 
-    async Task<Data.Entities.Consumption> IConsumptionRepository.AddAsync(Data.Entities.Consumption consumption)
+    public async Task<Consumption>AddAsync(Consumption consumption)
     {
         _db.Consumptions.Add(consumption);
         await _db.SaveChangesAsync();
@@ -21,7 +22,7 @@ public class ConsumptionRepository : IConsumptionRepository
         return consumption;
     }
 
-    async Task<Data.Entities.Consumption> IConsumptionRepository.DeleteAsync(Data.Entities.Consumption consumption)
+    public async Task<Consumption>DeleteAsync(Consumption consumption)
     {
         _db.Consumptions.Remove(consumption);
         await _db.SaveChangesAsync();
@@ -29,18 +30,18 @@ public class ConsumptionRepository : IConsumptionRepository
         return consumption;
     }
 
-    async Task<List<Data.Entities.Consumption>> IConsumptionRepository.GetAllConsumptionAsync()
+    public async Task<List<Consumption>>GetAllConsumptionAsync()
     {
-        return await _db.Consumptions.AsNoTracking().ToListAsync();
+        return await _db.Consumptions.Include(c => c.Member).ThenInclude(c => c.family).Include(c => c.ConsumptionType).AsNoTracking().ToListAsync();
     }
 
-    async Task<Data.Entities.Consumption?> IConsumptionRepository.GetConsumptionByIdAsync(int id)
+    public async Task<Consumption?>GetConsumptionByIdAsync(int id)
     {
-        return await _db.Consumptions.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+        return await _db.Consumptions.Include(c => c.Member).ThenInclude(c => c.family).Include(c => c.ConsumptionType).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
 
     }
 
-    async Task<Data.Entities.Consumption> IConsumptionRepository.UpdateAsync(Data.Entities.Consumption consumption)
+    public async Task<Consumption>UpdateAsync(Consumption consumption)
     {
         _db.Consumptions.Update(consumption);
         await _db.SaveChangesAsync();
