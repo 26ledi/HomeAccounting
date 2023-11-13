@@ -1,0 +1,86 @@
+﻿@using HomeAccounting.BusinessLogic.Services.Interfaces;
+@model HomeAccounting.BusinessLogic.Dtos.ConsumptionDto;
+
+<h1>Balance Sheet</h1>
+<h4>Consumption Maximum's</h4>
+
+<form asp-action="MaxConsumptionByTime" method="post">
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Put the start date
+                    <input type="date" asp-for="StartDate" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Put the end date
+                    <input type="date" asp-for="EndDate" />
+                </th>
+            </tr>
+
+        </thead>
+    </table>
+    <button type="submit" class="btn-blue">Submit</button>
+
+    @if (Model != null)
+    {
+        <p class="brute">!!! THE MONTH AND THE YEAR DEPEND ON THE START DATE !!! </p>
+        <p class="fant">- The max consumption for a given time are:</p>
+
+        @foreach (var item in Model.MaxConsumptionByTime)
+        {
+            <p class="fant">*@item</p>
+        }
+        <p class="fant">- The max consumption for the month of <span id="monthName"></span> are:</p>
+
+        <script>
+            var monthNames = [
+                "x",
+                "January", "Febuary", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            var currentMonth = @Model.StartDate.Value.Month;
+            document.getElementById("monthName").textContent = monthNames[currentMonth];
+        </script>
+
+        @foreach (var item in Model.MaxConsumptionByMonth)
+        {
+            <p class="fant">*@item</p>
+        }
+        <p class="fant">- The max consumption for the year @Model.StartDate.Value.Year are:</p>
+
+        @foreach (var item in Model.MaxConsumptionByYear)
+        {
+            <p class="fant">*@item</p>
+        }
+    }
+</form>
+<style>
+    .ktk {
+        color: darkslategray;
+        font-weight: bold;
+    }
+
+    .fant {
+        color: midnightblue;
+        font-weight: bold;
+    }
+
+    .btn-blue {
+        background-color: midnightblue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+
+    .brute {
+        color: darkred;
+        font-weight: bold;
+    }
+</style>

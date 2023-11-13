@@ -1,10 +1,13 @@
 ﻿using HomeAccounting.Data.Entities;
 using HomeAccounting.DataAccess.Entities;
+using HomeAccounting.Models.SeedData;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeAccounting.Data
 {
-    public class DbContextHome : DbContext
+    public class DbContextHome :IdentityDbContext<IdentityUser>
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Family> Families { get; set; }
@@ -17,12 +20,10 @@ namespace HomeAccounting.Data
         {
 
         }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.Entity<Member>().HasIndex(member => new { member.Surname, member.Name }).IsUnique();
+            builder.SeedApplicationData();
         }
-       
     }
 }

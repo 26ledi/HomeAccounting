@@ -11,8 +11,8 @@ namespace HomeAccounting.BusinessLogic.Dtos
     {
         public int ?Id { get; set; }
         public string ?FamilyName { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime ?StartTime { get; set; }
+        public DateTime ?EndTime { get; set; }
         public double? BalanceTime { get; set; }
         public double? BalanceIncomeMonth { get; set; }
         public double? BalanceIncomeYear { get; set; }

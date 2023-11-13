@@ -1,8 +1,10 @@
 using HomeAccounting.BusinessLogic.Services.Implementations;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using HomeAccounting.Data;
+using HomeAccounting.DataAccess.Entities;
 using HomeAccounting.DataAccess.Repositories.Implementations;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -24,6 +26,15 @@ builder.Services.AddScoped<IConsumptionService, ConsumptionService>();
 builder.Services.AddScoped<IConsumptionTypeRepository, ConsumptionTypeRepository>();
 builder.Services.AddScoped<IConsumptionTypeService, ConsumptionTypeService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+{
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.Password.RequiredLength = 5;
+    opts.Password.RequireDigit = false;
+    opts.Password.RequireLowercase = false;
+})
+                .AddEntityFrameworkStores<DbContextHome>()
+                .AddDefaultTokenProviders();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,11 +45,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

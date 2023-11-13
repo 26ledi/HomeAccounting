@@ -1,0 +1,27 @@
+﻿@using HomeAccounting.BusinessLogic.Services.Interfaces;
+@model HomeAccounting.BusinessLogic.Dtos.ConsumptionDto;
+@inject IConsumptionService consumptionService
+
+<h1>Balance Sheet</h1>
+<h4>Consumption Max With Days</h4>
+
+<form asp-action="BalanceDaysMax method="post">
+
+    <p class="ktk">List of Days that have maximum consumption's amount</p>
+    @foreach(var day in await consumptionService.GetDaysWithMaxConsumptionAsync())
+    {
+        <p class="fant"> *@day</p>
+    }
+
+</form>
+<style>
+    .ktk{
+        color:darkslategray;
+        font-weight:bold;
+    }
+
+    .fant {
+        color: midnightblue;
+        font-weight: bold;
+    }
+</style>

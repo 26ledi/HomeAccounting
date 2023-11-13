@@ -5,13 +5,14 @@
 <h1>Balance Choice</h1>
 <h4>Consumption</h4>
 <form asp-controller="Balance"   method="get">
-
     <h6>Show the frequents type of consumptions for a given time,month and year</h6>
     <a href="@Url.Action("BalanceForType", "Consumption")" class="btn btn-success">Go</a>
     <h6>Show the member's frequent consumptions for a given time,month and year</h6>
     <a href="@Url.Action("BalanceForMember", "Consumption")" class="btn btn-success">Go</a>
-   
-    
+    <h6>Displaying days with their maximum amount</h6>
+    <a href="@Url.Action("BalanceDaysMax", "Consumption")" class="btn btn-success">Go</a>
+    <h6>Displaying a list of consumption names with the maximum amount by time,month and year</h6>
+    <a href="@Url.Action("MaxConsumptionByTime", "Consumption")" class="btn btn-success">Go</a>
 </form>
 <style>
     .btn-success {

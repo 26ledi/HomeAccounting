@@ -38,13 +38,22 @@
     
     <input type="submit" value="Submit" class="btn-blue" />
     @if (Model!=null)
-    { 
+    {
         <p class="result">Income for a given time : @Model.Balance</p>
-        <p class="result">Income for a month(Month is found in the StartDate ) : @Model.BalanceIncomeMonth</p>
-        <p class="result">Income for a year : @Model.BalanceIncomeYear</p>
+        <p class="result">Income the month of <span id="monthName"></span>  : @Model.BalanceIncomeMonth</p>
+        <p class="result">Income for the year @Model.StartTime.Year : @Model.BalanceIncomeYear</p>
         <p class="result">Highest Income for a given time : @Model.HighestIncomeTime</p>
-        <p class="result">Highest Income for a given month(Month is found in the StartDate ): @Model.HighestIncomeMonth</p>
-        <p class="result">Highest Income for a year : @Model.HighestIncomeYear</p>
+        <p class="result">Highest Income for the month is <span id="monthName"></span>: @Model.HighestIncomeMonth</p>
+        <p class="result">Highest Income for the year @Model.StartTime.Year : @Model.HighestIncomeYear</p>
+        <script>
+            var monthNames = [
+                "x",
+                "January", "Febuary", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            var currentMonth = @Model.StartTime.Month;
+            document.getElementById("monthName").textContent = monthNames[currentMonth];
+        </script>
     }
      
 </form>

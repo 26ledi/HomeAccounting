@@ -92,7 +92,7 @@ namespace HomeAccounting.Controllers
         [HttpPost]
         public async Task<IActionResult> BalanceForType(ConsumptionDto consumptionDto)
         {
-            if (ModelState.IsValid) 
+            if (!ModelState.IsValid) 
             {
                 
                 consumptionDto.List = await _consumptionService.GetFrequentConsumptionTypeByTimeAsync(consumptionDto.StartDate.Value,consumptionDto.EndDate.Value);
@@ -111,7 +111,7 @@ namespace HomeAccounting.Controllers
         [HttpPost]
         public async Task<IActionResult> BalanceForMember(ConsumptionDto consumptionDto)
         {
-            if (ModelState.IsValid) 
+            if (!ModelState.IsValid) 
             {
                 consumptionDto.FrequentMembersByTime = await _consumptionService.GetMemberFrequentConsumptionByTimeAsync(consumptionDto.StartDate.Value, consumptionDto.EndDate.Value);
                 consumptionDto.FrequentMembersByMonth = await _consumptionService.GetMemberFrequentConsumptionByMonthAsync(consumptionDto.StartDate.Value.Month, consumptionDto.StartDate.Value.Year);
@@ -121,6 +121,38 @@ namespace HomeAccounting.Controllers
             return View(consumptionDto);
         }
 
+        [HttpGet]
+        public IActionResult BalanceDaysMax()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> BalanceDaysMax(ConsumptionDto consumptionDto)
+        {
+            if (ModelState.IsValid)
+            {
+                consumptionDto.MaxDayofWeeks = await _consumptionService.GetDaysWithMaxConsumptionAsync();
+            }
 
+            return View(consumptionDto);
+        }
+
+        [HttpGet]
+        public IActionResult MaxConsumptionByTime()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> MaxConsumptionByTime(ConsumptionDto consumptionDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                consumptionDto.MaxConsumptionByTime = await _consumptionService.GetMaxConsumptionNameByTime(consumptionDto.StartDate.Value, consumptionDto.EndDate.Value);
+                consumptionDto.MaxConsumptionByMonth = await _consumptionService.GetMaxConsumptionNameByMonth(consumptionDto.StartDate.Value.Month, consumptionDto.StartDate.Value.Year);
+                consumptionDto.MaxConsumptionByYear = await _consumptionService.GetMaxConsumptionNameByYear(consumptionDto.StartDate.Value.Year);
+            }
+
+            return View(consumptionDto);
+        }
     }
 }

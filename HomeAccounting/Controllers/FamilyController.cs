@@ -78,26 +78,26 @@ namespace HomeAccounting.Controllers
         {
             if (ModelState.IsValid)
             {
-                double balanceGivingTime = await _familyService.CalculateIncomeGivingTimeAsync(familyDto.Id.Value, familyDto.StartTime, familyDto.EndTime);
+                double balanceGivingTime = await _familyService.CalculateIncomeGivingTimeAsync(familyDto.Id.Value, familyDto.StartTime.Value, familyDto.EndTime.Value);
                 familyDto.BalanceTime = balanceGivingTime;
 
-                DateTime firstDayOfMonth = new DateTime(familyDto.StartTime.Year, familyDto.StartTime.Month, 1);
+                DateTime firstDayOfMonth = new DateTime(familyDto.StartTime.Value.Year, familyDto.StartTime.Value.Month, 1);
                 double balanceMonth = await _familyService.CalculateIncomeForMonthAsync(familyDto.Id.Value, firstDayOfMonth.Year, firstDayOfMonth.Month);
                 familyDto.BalanceIncomeMonth = balanceMonth;
 
-                DateTime firstDayOfYear = new DateTime(familyDto.StartTime.Year, 1, 1);
+                DateTime firstDayOfYear = new DateTime(familyDto.StartTime.Value.Year, 1, 1);
                 double balanceYear = await _familyService.CalculateIncomeForYearAsync(familyDto.Id.Value, firstDayOfYear.Year);
                 familyDto.BalanceIncomeYear = balanceYear;
 
-                double highestIncomeGivingTime = await _familyService.GetHighestIncomeGivingTimeAsync(familyDto.Id.Value, familyDto.StartTime, familyDto.EndTime);
+                double highestIncomeGivingTime = await _familyService.GetHighestIncomeGivingTimeAsync(familyDto.Id.Value, familyDto.StartTime.Value, familyDto.EndTime.Value);
                 familyDto.HighestIncomeTime = highestIncomeGivingTime;
 
-                DateTime DayOfMonth = new DateTime(familyDto.StartTime.Year, familyDto.StartTime.Month, 1);
+                DateTime DayOfMonth = new DateTime(familyDto.StartTime.Value.Year, familyDto.StartTime.Value.Month, 1);
                 double highestIncomeMonth = await _familyService.GetHighestIncomeMonthAsync(familyDto.Id.Value, DayOfMonth.Year, DayOfMonth.Month);
                 familyDto.HighestIncomeMonth = highestIncomeMonth;
 
 
-                DateTime DayOfYear = new DateTime(familyDto.StartTime.Year, 1, 1);
+                DateTime DayOfYear = new DateTime(familyDto.StartTime.Value.Year, 1, 1);
                 double highestIncomeYear = await _familyService.GetHighestIncomeYearAsync(familyDto.Id.Value, DayOfYear.Year);
                 familyDto.HighestIncomeYear = highestIncomeYear;
             }

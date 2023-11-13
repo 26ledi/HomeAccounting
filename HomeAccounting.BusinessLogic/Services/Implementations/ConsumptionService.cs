@@ -3,7 +3,6 @@ using HomeAccounting.BusinessLogic.Dtos;
 using HomeAccounting.BusinessLogic.Exceptions;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using HomeAccounting.Data.Entities;
-using HomeAccounting.DataAccess.Repositories.Implementations;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
 
 namespace HomeAccounting.BusinessLogic.Services.Implementations
@@ -14,7 +13,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public readonly IMemberRepository _memberRepository;
         public readonly IConsumptionTypeRepository _consumptionTypeRepository;
         public readonly IMapper _mapper;
-        public ConsumptionService(IConsumptionRepository consumptionRepository,IConsumptionTypeRepository consumptionTypeRepository,IMemberRepository memberRepository, IMapper mapper)
+        public ConsumptionService(IConsumptionRepository consumptionRepository, IConsumptionTypeRepository consumptionTypeRepository, IMemberRepository memberRepository, IMapper mapper)
         {
             _mapper = mapper;
             _consumptionRepository = consumptionRepository;
@@ -78,55 +77,48 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
 
             return _mapper.Map<ConsumptionDto>(consumptionLooked);
         }
-        public async Task<List<string>> GetMemberFrequentConsumptionByTimeAsync(DateTime startTime,DateTime endTime)
+        public async Task<List<string>> GetMemberFrequentConsumptionByTimeAsync(DateTime startTime, DateTime endTime)
         {
             var consumptionMember = await _consumptionRepository.GetAllConsumptionAsync();
-
             var frequentConsumptionTypes = consumptionMember
                 .Where(f => f.Date >= startTime.Date && f.Date <= endTime.Date)
                 .Select(f => f.Member.Surname)
                 .ToList();
-               
+
             return frequentConsumptionTypes;
         }
-        public async Task<List<string>>GetMemberFrequentConsumptionByMonthAsync(int month, int year)
+        public async Task<List<string>> GetMemberFrequentConsumptionByMonthAsync(int month, int year)
         {
             DateTime startDate = new DateTime(year, month, 1);
             var daysInMonth = DateTime.DaysInMonth(year, month);
             DateTime endDate = new DateTime(year, month, daysInMonth);
             var consumptionMember = await _consumptionRepository.GetAllConsumptionAsync();
-
             var frequentConsumptionTypes = consumptionMember
                 .Where(f => f.Date >= startDate.Date && f.Date <= endDate.Date)
                 .Select(f => f.Member.Surname)
-    .           ToList();
+                .ToList();
 
             return frequentConsumptionTypes;
         }
 
-        public async Task<List<string>>GetMemberFrequentConsumptionByYearAsync(int year)
+        public async Task<List<string>> GetMemberFrequentConsumptionByYearAsync(int year)
         {
             DateTime startTime = new DateTime(year, 1, 1);
             DateTime endTime = new DateTime(year, 12, 31);
-
             var consumptionMember = await _consumptionRepository.GetAllConsumptionAsync();
-
             var frequentConsumptionTypes = consumptionMember
                 .Where(f => f.Date >= startTime.Date && f.Date <= endTime.Date)
                 .Select(f => f.Member.Surname)
                 .ToList();
 
             return frequentConsumptionTypes;
-
         }
-        public async Task<List<string>>GetFrequentConsumptionTypeByMonthAsync(int month,int year)
+        public async Task<List<string>> GetFrequentConsumptionTypeByMonthAsync(int month, int year)
         {
             DateTime startDate = new DateTime(year, month, 1);
             var daysInMonth = DateTime.DaysInMonth(year, month);
             DateTime endDate = new DateTime(year, month, daysInMonth);
-
             var consumptionTypes = await _consumptionRepository.GetAllConsumptionAsync();
-
             var frequentConsumptionTypes = consumptionTypes
                 .Where(f => f.Date >= startDate.Date && f.Date <= endDate.Date)
                 .GroupBy(f => f.ConsumptionType.Name)
@@ -139,7 +131,6 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<List<string>> GetFrequentConsumptionTypeByTimeAsync(DateTime startTime, DateTime endTime)
         {
             var consumptionTypes = await _consumptionRepository.GetAllConsumptionAsync();
-
             var frequentConsumptionTypes = consumptionTypes
                 .Where(f => f.Date >= startTime.Date && f.Date <= endTime.Date)
                 .GroupBy(f => f.ConsumptionType.Name)
@@ -149,7 +140,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
 
             return frequentConsumptionTypes;
         }
-        public async Task<List<string>>GetFrequentConsumptionTypeByYearAsync(int year)
+        public async Task<List<string>> GetFrequentConsumptionTypeByYearAsync(int year)
         {
             DateTime startTime = new DateTime(year, 1, 1);
             DateTime endTime = new DateTime(year, 12, 31);
@@ -162,6 +153,88 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
                 .ToList();
 
             return frequentConsumptionTypes;
-        }   
+        }
+        public async Task<List<(string Day,string Amount)>> GetDaysWithMaxConsumptionAsync()
+        {
+            var consumptions = await _consumptionRepository.GetAllConsumptionAsync();
+            var max = 0;
+            var daysWithMaxConsumption = consumptions
+                 .Where(c => c.Amount > max)
+                 .GroupBy(c => c.Date.DayOfWeek.ToString())
+                 .Select(group => new
+                  {
+                      Day = group.Key,
+                      Amount = group.Max(c => c.Amount.ToString())
+
+                  })
+                 .OrderByDescending(c => c.Amount)
+                 .ToList();
+
+            return daysWithMaxConsumption
+                .Select(item => (item.Day, item.Amount))
+                .ToList();
+        }
+        public async Task<List<(string Name,string Amount)>> GetMaxConsumptionNameByTime(DateTime startTime, DateTime endTime)
+        {
+            var consumptions = await _consumptionRepository.GetAllConsumptionAsync();
+            var MaxConsumption = consumptions
+                 .Where(c => c.Date >= startTime.Date && c.Date <= endTime.Date)
+                 .GroupBy(c => c.Name)
+                 .Select(group => new
+                 {
+                     Name = group.Key,
+                     Amount = group.Max(c => c.Amount.ToString())
+
+                 })
+                  .OrderByDescending(item => item.Amount)
+                  .ToList();
+
+            return MaxConsumption
+                  .Select(item => (item.Name, item.Amount))
+                  .ToList();
+        }
+        public async Task<List<(string Name,string Amount)>> GetMaxConsumptionNameByMonth(int month, int year)
+        {
+            DateTime startDate = new DateTime(year, month, 1);
+            var daysInMonth = DateTime.DaysInMonth(year, month);
+            DateTime endDate = new DateTime(year, month, daysInMonth);
+            var consumption = await _consumptionRepository.GetAllConsumptionAsync();
+            var MaxConsumption = consumption
+                .Where(c => c.Date >= startDate.Date && c.Date <= endDate.Date)
+                   .GroupBy(c => c.Name)
+                 .Select(group => new
+                 {
+                     Name = group.Key,
+                     Amount = group.Max(c => c.Amount.ToString())
+
+                 })
+                  .OrderByDescending(item => item.Amount)
+                  .ToList();
+
+            return MaxConsumption
+                  .Select(item => (item.Name, item.Amount))
+                  .ToList();
+        }
+        public async Task<List<(string Name,string Amount)>> GetMaxConsumptionNameByYear(int year)
+        {
+            DateTime startTime = new DateTime(year, 1, 1);
+            DateTime endTime = new DateTime(year, 12, 31);
+            var consumptions = await _consumptionRepository.GetAllConsumptionAsync();
+            var MaxConsumption = consumptions
+               .Where(c => c.Date >= startTime.Date && c.Date <= endTime.Date)
+                .GroupBy(c => c.Name)
+                 .Select(group => new
+                 {
+                     Name = group.Key,
+                     Amount = group.Max(c => c.Amount.ToString())
+
+                 })
+                  .OrderByDescending(item => item.Amount)
+                  .ToList();
+
+            return MaxConsumption
+                  .Select(item => (item.Name, item.Amount))
+                  .ToList();
+        }
     }
 }
