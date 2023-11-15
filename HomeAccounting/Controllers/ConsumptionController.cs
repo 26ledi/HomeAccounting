@@ -1,9 +1,11 @@
 ﻿using HomeAccounting.BusinessLogic.Dtos;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAccounting.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ConsumptionController : Controller
     {
         private readonly IConsumptionService _consumptionService;

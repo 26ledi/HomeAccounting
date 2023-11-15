@@ -22,19 +22,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+
+                        @if(User.Identity.IsAuthenticated)
+                        {
                             <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="Index">Members</a>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Family" asp-action="Index">Families</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Income" asp-action="Index">Incomes</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Consumption" asp-action="Index">Consumptions</a>
-                        </li>
+                        }
+                       
                     </ul>
                 </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span class="navbar-text">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">LogIn</a>
+                    </span>
+                }
+                else
+                {
+                    <span class="navbar-text">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">LogOut</a>
+                    </span>
+                }
             </div>
         </nav>
     </header>

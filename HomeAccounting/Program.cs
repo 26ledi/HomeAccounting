@@ -1,7 +1,6 @@
 using HomeAccounting.BusinessLogic.Services.Implementations;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using HomeAccounting.Data;
-using HomeAccounting.DataAccess.Entities;
 using HomeAccounting.DataAccess.Repositories.Implementations;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +20,7 @@ builder.Services.AddScoped<IIncomeRepository, IncomeRepository>();
 builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<ISourceIncomeRepository, SourceIncomeRepository>();
 builder.Services.AddScoped<ISourceIncomeService, SourceIncomeService>();
-builder.Services.AddScoped<IConsumptionRepository,ConsumptionRepository>();
+builder.Services.AddScoped<IConsumptionRepository, ConsumptionRepository>();
 builder.Services.AddScoped<IConsumptionService, ConsumptionService>();
 builder.Services.AddScoped<IConsumptionTypeRepository, ConsumptionTypeRepository>();
 builder.Services.AddScoped<IConsumptionTypeService, ConsumptionTypeService>();
@@ -35,6 +34,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 })
                 .AddEntityFrameworkStores<DbContextHome>()
                 .AddDefaultTokenProviders();
+//builder.Services.AddAuthentication();
+//builder.Services.AddMvc(options =>
+//{
+//    // Apply authentification's filter globaly in every actions
+//    var policy = new AuthorizationPolicyBuilder()
+//        .RequireAuthenticatedUser()
+//        .Build();
+//    options.Filters.Add(new AuthorizeFilter(policy));
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,6 +59,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,5 +1,6 @@
 ﻿@model HomeAccounting.BusinessLogic.Dtos.FamilyDto
 @using HomeAccounting.BusinessLogic.Services.Interfaces
+@using System.Security.Claims;
 @inject IFamilyService familyService
 
 <h4>Balance Sheet</h4>
@@ -9,6 +10,7 @@
             <tr>
                 <th>
                     Name of Family
+  
                     <select asp-for="Id">
                         <option value="">Select family</option>
                         @foreach (var family in await familyService.GetAllFamilyAsync())
