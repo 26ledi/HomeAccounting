@@ -1,0 +1,25 @@
+﻿@inject IFamilyService familyService;
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@using System.Security.Claims;
+
+<h4>OverView Balance Sheet</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Family</th>
+            <th>Incomes</th>
+            <th>Consumptions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in await familyService.GetAllFamilyAsync())
+        {
+            <tr>
+                <td>@item.FamilyName</td>
+                <td>@item.FamilyMember.Select(f => f.Incomes.Sum(i => i.Amount)).ToList().Sum()</td>
+                <td>@item.FamilyMember.Select(f => f.Consumptions.Sum(c => c.Amount)).ToList().Sum()</td>
+            </tr>
+        }
+    </tbody>
+</table>

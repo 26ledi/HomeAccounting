@@ -1,0 +1,11 @@
+OverViewBalance Sheet
+Family	Incomes	Consumptions
+Ledi	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Maslow	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Dembele	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Diallo	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Mbappe	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Bellingham	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Doe	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Keita	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]
+Gates	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]	System.Linq.Enumerable+SelectListIterator`2[HomeAccounting.BusinessLogic.Dtos.MemberDto,System.Double]

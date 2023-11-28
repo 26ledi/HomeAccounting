@@ -76,6 +76,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Family/OverViewBalance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFtaWx5XE92ZXJWaWV3QmFsYW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -118,6 +122,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Member/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/СУБД/HomeAccounting/HomeAccounting/Views/Member/OverviewBalance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXE92ZXJ2aWV3QmFsYW5jZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [J:/СУБД/HomeAccounting/HomeAccounting/Views/Shared/Error.cshtml]

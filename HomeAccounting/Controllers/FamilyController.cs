@@ -107,6 +107,11 @@ namespace HomeAccounting.Controllers
             return View(familyDto);
         }
 
+        [HttpGet]
+        public IActionResult OverviewBalance()
+        {
+            return View();
+        }
 
     }
 }

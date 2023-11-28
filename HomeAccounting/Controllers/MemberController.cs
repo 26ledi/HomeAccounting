@@ -130,5 +130,10 @@ namespace HomeAccounting.Controllers
             return View(memberDto);
         }
 
+        [HttpGet]
+        public IActionResult OverviewBalance()
+        {
+            return View();
+        }
     }
 }

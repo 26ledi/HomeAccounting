@@ -232,6 +232,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
             }
             return max;
         }
+   
         public async Task<double> GetHighestIncomeYearAsync(int id, int year)
         {
             DateTime startTime = new DateTime(year, 1, 1);
@@ -241,16 +242,17 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
             {
                 throw new NotFoundException("Family does not exist");
             }
-            double currentVal;
             double max = 0;
-           // var members = await _memberRepository.GetMemberAsync();
+            double currentVal;
+            double sum = 0;
+            // var members = await _memberRepository.GetMemberAsync();
             foreach (var highestIncome in familyLooked.FamilyMember)
             {
                 if (highestIncome.Incomes != null)
                 {
                     foreach (var maxIncome in highestIncome.Incomes)
                     {
-                        if (maxIncome.Date >= startTime && maxIncome.Date <= endTime)
+                        if (maxIncome.Date.Year >= startTime.Year && maxIncome.Date.Year <= endTime.Year)
                         {
                             currentVal = maxIncome.Amount;
                             if (currentVal > max)

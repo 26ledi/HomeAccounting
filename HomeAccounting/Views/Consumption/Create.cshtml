@@ -2,6 +2,7 @@
 @model HomeAccounting.BusinessLogic.Dtos.ConsumptionDto;
 @inject IConsumptionService consumptionService;
 @inject IConsumptionTypeService consumptionTypeService;
+@inject IMemberService memberService;
 
 <h1>Create</h1>
 <h4>Consumption</h4>
@@ -19,9 +20,9 @@
                     Enter Member
                     <select asp-for="MemberId">
                         <option value="">Select Member</option>
-                        @foreach (var member in await consumptionService.GetAsync())
+                        @foreach (var member in await memberService.GetMemberDtoAsync())
                         {
-                            <option value="@member.Id">@member.Member.Surname</option>
+                            <option value="@member.Id">@member.Surname</option>
                         }
                     </select>
                 </th>

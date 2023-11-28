@@ -1,0 +1,29 @@
+﻿@inject IMemberService memberService;
+@using HomeAccounting.BusinessLogic.Services.Interfaces
+@using System.Security.Claims;
+
+<h4>OverViewBalance Sheet</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Incomes</th>
+                <th>Consumptions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var item in await memberService.GetMemberDtoAsync())
+            {
+                <tr>
+                    <td>@item.Surname</td>
+                    <td>@item.Incomes.Sum(m=>m.Amount)</td>
+                    <td>@item.Consumptions.Sum(m=>m.Amount)</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+

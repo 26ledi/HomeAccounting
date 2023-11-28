@@ -33,10 +33,17 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
             return family;
         }
 
-        public async Task<List<Family>>GetAllFamilyAsync()
+        public async Task<List<Family>> GetAllFamilyAsync()
         {
-            return await _db.Families.Include(f => f.FamilyMember).ThenInclude(f=>f.Incomes).AsNoTracking().ToListAsync();
+            return await _db.Families
+                .Include(f => f.FamilyMember)
+                    .ThenInclude(fm => fm.Incomes)
+                .Include(f => f.FamilyMember)
+                    .ThenInclude(fm => fm.Consumptions)
+                .AsNoTracking()
+                .ToListAsync();
         }
+
         public async Task<Family?>GetFamilyByNameAsync(string name)
         {
             return await _db.Families.AsNoTracking().FirstOrDefaultAsync(x => x.FamilyName == name);

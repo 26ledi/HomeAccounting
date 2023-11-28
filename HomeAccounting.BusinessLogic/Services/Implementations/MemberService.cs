@@ -250,11 +250,13 @@ public class MemberService : IMemberService
         }
         double max = 0;
         double currentVal;
+        double sum = 0;
         foreach (var incomeRecord in memberLooked.Incomes)
         {
-            if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
+            if (incomeRecord.Date.Year >= startTime.Year && incomeRecord.Date.Year <= endTime.Year)
             {
-                currentVal = incomeRecord.Amount;
+                sum = sum + incomeRecord.Amount;
+                currentVal = sum;
                 if (currentVal > max)
                 {
                     max = currentVal;

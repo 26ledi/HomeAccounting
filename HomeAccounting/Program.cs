@@ -34,15 +34,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 })
                 .AddEntityFrameworkStores<DbContextHome>()
                 .AddDefaultTokenProviders();
-//builder.Services.AddAuthentication();
-//builder.Services.AddMvc(options =>
-//{
-//    // Apply authentification's filter globaly in every actions
-//    var policy = new AuthorizationPolicyBuilder()
-//        .RequireAuthenticatedUser()
-//        .Build();
-//    options.Filters.Add(new AuthorizeFilter(policy));
-//});
 
 var app = builder.Build();
 

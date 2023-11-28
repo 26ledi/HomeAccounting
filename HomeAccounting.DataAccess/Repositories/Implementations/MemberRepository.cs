@@ -42,7 +42,8 @@ namespace HomeAccounting.DataAccess.Repositories.Implementations
 
         public async Task<List<Member>>GetMemberAsync()
         {
-            return await _db.Members.Include(m => m.family).Include(m => m.Incomes).AsNoTracking().ToListAsync();
+            return await _db.Members.Include(m => m.family).Include(m => m.Incomes)
+                .Include(m => m.Consumptions).AsNoTracking().ToListAsync();
         }
      
         public async Task<Member?>GetMemberByIdAsync(int id)

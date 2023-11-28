@@ -22,7 +22,7 @@ namespace HomeAccounting.BusinessLogic.Dtos
         public DateTime EndTime { get; set; }
         public DateTime Birthday { get; set; }
         public int MemberId { get; set; }
-        public Member ? member { get; set; }
+        public Member? member { get; set; }
         public double ?Balance {  get; set; }
         public double? BalanceIncomeMonth { get; set; }
         public double? BalanceIncomeYear { get; set; }
@@ -31,6 +31,7 @@ namespace HomeAccounting.BusinessLogic.Dtos
         public double? HighestIncomeYear { get; set; }
         public int FamilyId { get; set; }
         public Family? family { get; set; }
-       
+        public List<ConsumptionDto> Consumptions { get; set; }
+        public List<IncomeDto> Incomes { get; set; }
     }
 }
