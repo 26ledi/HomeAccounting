@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeAccounting.Data
 {
-    public class DbContextHome :IdentityDbContext<IdentityUser>
+    public class DbContextHome :IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Family> Families { get; set; }

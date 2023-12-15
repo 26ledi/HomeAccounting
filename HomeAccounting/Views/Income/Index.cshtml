@@ -2,6 +2,8 @@
 
 <h1>Income's List</h1>
 
+<input type="text" id="searchInput" placeholder="Search by surname"/>
+
 <table>
     <thead>
 
@@ -12,7 +14,10 @@
             <th> SourceName</th>
             <th> Amount</th>
             <th> Date</th>
-            <th> Actions</th>
+            @if (!User.IsInRole("Client"))
+            {
+                <th> Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -25,12 +30,49 @@
                 <td>@Model[i].Amount</td>
                 <td>@Model[i].Date.ToString("dd/MM/yyyy")</td>
 
+               @if (!User.IsInRole("Client"))
+               {
                 <td>
                     <a href="@Url.Action("Edit", "Income", new { id = Model[i].Id })">Edit</a> |
                     <a href="@Url.Action("Delete", "Income", new { id = Model[i].Id })">Delete</a>
                 </td>
+               }
             </tr>
         }
     </tbody>
 </table>
+
+@if(!User.IsInRole("Client"))
+{
 <a href="@Url.Action("Create", "Income")" class="btn btn-primary">Create</a>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Sélection du champ de saisie
+        const searchInput = document.getElementById("searchInput");
+
+        // Écoutez les événements de saisie dans le champ
+        searchInput.addEventListener("input", function () {
+            // Obtenez la valeur saisie dans le champ
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // Sélectionnez toutes les lignes du tableau sauf la première (en-tête)
+            const rows = document.querySelectorAll("table tbody tr:not(:first-child)");
+
+            // Parcourez chaque ligne du tableau
+            rows.forEach(function (row) {
+                // Obtenez le nom du membre dans chaque ligne
+                const Surname = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+                // Vérifiez si le terme de recherche est présent dans le nom
+                if (Surname.includes(searchTerm)) {
+                    // Si le terme est trouvé, affichez la ligne
+                    row.style.display = "table-row";
+                } else {
+                    // Sinon, masquez la ligne
+                    row.style.display = "none";
+                }
+            });
+        });
+    });
+</script>

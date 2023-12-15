@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAccounting.Controllers
 {
-    [Authorize(Roles = "Admin")]
+
+    [Authorize]
     public class MemberController : Controller
     {
         private readonly IMemberService _memberService;
@@ -17,11 +18,15 @@ namespace HomeAccounting.Controllers
         }
 
         //GET:Members
+
+        //[ResponseCache(Duration =60)]
         public async Task<IActionResult> Index()
         {
             var members = await _memberService.GetMemberDtoAsync();
             return View(members);
         }
+
+     
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -34,7 +39,7 @@ namespace HomeAccounting.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(MemberDto memberDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await _memberService.AddAsync(memberDto);
 
@@ -46,6 +51,7 @@ namespace HomeAccounting.Controllers
             return View(memberDto);
         }
         //PUT:Members
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -94,6 +100,7 @@ namespace HomeAccounting.Controllers
         }
 
         //Calculate Income by month(given month):Members
+
         [HttpGet]
         public IActionResult Balance()
         {

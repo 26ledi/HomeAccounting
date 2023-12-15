@@ -1,0 +1,44 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Users </h2>
+        </div>
+    </div>
+</div>
+<hr class="bg-primary" />
+<table class="table table-bordered table-striped" style="width:100%;">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>UserName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Account" asp-action="Edit" class="btn btn-primary" asp-route-id="@user.Id">
+                            <i class="bi bi-pencil-square"></i>&nbsp;Edit
+                        </a>
+                        <a asp-controller="Account" asp-action="Delete" class="btn btn-danger" asp-route-id="@user.Id">
+                            <i class="bi bi-trash3-fill"></i>&nbsp;Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>

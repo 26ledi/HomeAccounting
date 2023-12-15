@@ -10,5 +10,5 @@ public interface IMemberRepository
     Task<Member> UpdateAsync(Member member);
     Task<Member> DeleteAsync(Member member);
     Task<Member?> GetMemberByNameAndSurname(string name, string surname);
-   // Task<Member> GetMemberIncomesById(int id);
+   
 }

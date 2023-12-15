@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAccounting.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class FamilyController : Controller
     {
         private readonly IFamilyService _familyService;
@@ -14,11 +14,14 @@ namespace HomeAccounting.Controllers
         {
             _familyService = familyService;
         }
+
+        //[ResponseCache(Duration = 60)]
         public async Task<IActionResult> Index()
         {
             var families = await _familyService.GetAllFamilyAsync();
             return View(families);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -36,10 +39,12 @@ namespace HomeAccounting.Controllers
 
             return View(familyDto);
         }
+     
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var family = await _familyService.GetAllFamilyByIdAsync(id);
+
             return View(family);
         }
         [HttpPost]
@@ -48,11 +53,13 @@ namespace HomeAccounting.Controllers
             if (ModelState.IsValid)
             {
                 await _familyService.UpdateAsync(familyDto);
+
                 return RedirectToAction("Index", "Family");
             }
 
             return View(familyDto);
         }
+      
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -70,8 +77,9 @@ namespace HomeAccounting.Controllers
 
             return View(familyDto);
         }
+
         [HttpGet]
-        public async Task<IActionResult> Balance()
+        public IActionResult Balance()
         {
             return View();
         }

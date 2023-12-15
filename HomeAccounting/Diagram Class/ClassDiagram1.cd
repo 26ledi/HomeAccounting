@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HomeAccounting.Data.Entities.Consumption" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.Data.Entities.ConsumptionType" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.Data.Entities.Income" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.Data.Entities.Member" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.Data.Entities.SourceIncome" Collapsed="true">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Entities.Family" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Entities.User" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.ConsumptionRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.ConsumptionTypeRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.FamilyRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.IncomeRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.MemberRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.DataAccess.Repositories.Implementations.SourceIncomeRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="3.5" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.ConsumptionService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.ConsumptionTypeService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.FamilyService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="7.25" Width="1.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.IncomeService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.MemberService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Services.Implementations.SourceIncomeService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="4.25" Width="1.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.ConsumptionDto" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.ConsumptionTypeDto" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.FamilyDto" Collapsed="true">
+    <Position X="5" Y="6.25" Width="1.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.IncomeDto" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.MemberDto" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="HomeAccounting.BusinessLogic.Dtos.SourceIncomeDto" Collapsed="true">
+    <Position X="5" Y="5.25" Width="1.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="AccountController" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAABAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeAccounting.Controllers.ConsumptionController" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIQAAAEAgQAAAAAAEAAEACAEEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ConsumptionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeAccounting.Controllers.FamilyController" Collapsed="true">
+    <Position X="12.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAIgAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\FamilyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeAccounting.Controllers.HomeController" Collapsed="true">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeAccounting.Controllers.IncomeController" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACAAEAAAAAABA=</HashCode>
+      <FileName>Controllers\IncomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeAccounting.Controllers.MemberController" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAIgAAAAAAAUAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\MemberController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.Controller" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.IConsumptionRepository" Collapsed="true">
+    <Position X="14.5" Y="5" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.IConsumptionTypeRepository" Collapsed="true">
+    <Position X="12.25" Y="5" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.IFamilyRepository" Collapsed="true">
+    <Position X="10" Y="5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.IIncomeRepository" Collapsed="true">
+    <Position X="14.25" Y="5.75" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.IMemberRepository" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.DataAccess.Repositories.Interfaces.ISourceIncomeRepository" Collapsed="true">
+    <Position X="10" Y="5.75" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.IConsumptionService" Collapsed="true">
+    <Position X="10" Y="7.25" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.IConsumptionTypeService" Collapsed="true">
+    <Position X="12.25" Y="7.25" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.IFamilyService" Collapsed="true">
+    <Position X="14.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.IIncomeService" Collapsed="true">
+    <Position X="14.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.IMemberService" Collapsed="true">
+    <Position X="12.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="HomeAccounting.BusinessLogic.Services.Interfaces.ISourceIncomeService" Collapsed="true">
+    <Position X="10" Y="6.5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

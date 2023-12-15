@@ -3,6 +3,7 @@ using HomeAccounting.BusinessLogic.Dtos;
 using HomeAccounting.BusinessLogic.Exceptions;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HomeAccounting.BusinessLogic.Services.Implementations;
 
@@ -10,11 +11,13 @@ public class MemberService : IMemberService
 {
     private readonly IMemberRepository _memberRepository;
     private readonly IMapper _mapper;
+    private readonly IMemoryCache _cache;
 
-    public MemberService(IMemberRepository memberRepository, IMapper mapper)
+    public MemberService(IMemberRepository memberRepository, IMapper mapper, IMemoryCache cache)
     {
         _memberRepository = memberRepository;
         _mapper = mapper;
+        _cache = cache;
     }
     public async Task<MemberDto> AddAsync(MemberDto member)
     {
@@ -67,21 +70,37 @@ public class MemberService : IMemberService
         {
             throw new NotFoundException("This Member doesn't exist");
         }
-       
+
 
         return _mapper.Map<MemberDto>(memberLooked);
     }
 
     public async Task<List<MemberDto>> GetMemberDtoAsync()
     {
-        var members = await _memberRepository.GetMemberAsync();
+        const string cacheKey = "AllMembers"; // Clé pour stocker en cache toutes les familles
 
-        if (members is null)
+        if (_cache.TryGetValue(cacheKey, out List<MemberDto> cachedMembers))
         {
-            throw new NotFoundException("Not Found");
+            Console.WriteLine("Retrieving data from cache...");
+
+            return cachedMembers; // Retourner les données en cache si disponibles
+        }
+        else
+        {
+            var members = await _memberRepository.GetMemberAsync();
+
+            if (members is null)
+            {
+                throw new NotFoundException("Not Found");
+            }
+
+            var cacheEntryOptions = new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10) };
+            _cache.Set(cacheKey, _mapper.Map<List<MemberDto>>(members), cacheEntryOptions);
+
+
+            return _mapper.Map<List<MemberDto>>(members);
         }
 
-        return _mapper.Map<List<MemberDto>>(members);
     }
 
     /// <summary>
@@ -95,11 +114,14 @@ public class MemberService : IMemberService
     public async Task<double> CalculateIncomeGivingTimeAsync(int id, DateTime startTime, DateTime endTime)
     {
         var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
+
         if (memberLooked is null)
         {
             throw new NotFoundException("Member does not exist");
         }
+
         double incomeTotal = 0;
+
         foreach (var incomeRecord in memberLooked.Incomes)
         {
             if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
@@ -124,6 +146,7 @@ public class MemberService : IMemberService
         var daysInMonth = DateTime.DaysInMonth(year, month);
         DateTime endDate = new DateTime(year, month, daysInMonth);
         var memberLooked = await _memberRepository.GetMemberByIdAsync(memberId);
+
         if (memberLooked is null)
         {
             throw new NotFoundException("Member does not exist");
@@ -190,7 +213,7 @@ public class MemberService : IMemberService
             if (highestIncome.Date >= startime && highestIncome.Date <= endtime)
             {
                 currentVal = highestIncome.Amount;
-                if (currentVal>max)
+                if (currentVal > max)
                 {
                     max = currentVal;
                 }
@@ -216,14 +239,14 @@ public class MemberService : IMemberService
         {
             throw new NotFoundException("Member does not exist");
         }
-        double max=0;
+        double max = 0;
         double currentVal;
         foreach (var incomeRecord in memberLooked.Incomes)
         {
             if (incomeRecord.Date >= startTime && incomeRecord.Date <= endTime)
             {
                 currentVal = incomeRecord.Amount;
-                if (currentVal > max) 
+                if (currentVal > max)
                 {
                     max = currentVal;
                 }
@@ -246,7 +269,7 @@ public class MemberService : IMemberService
         var memberLooked = await _memberRepository.GetMemberByIdAsync(id);
         if (memberLooked is null)
         {
-           throw new NotFoundException("Member does not exist");
+            throw new NotFoundException("Member does not exist");
         }
         double max = 0;
         double currentVal;

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAccounting.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class ConsumptionController : Controller
     {
         private readonly IConsumptionService _consumptionService;
-        public ConsumptionController(IConsumptionService consumptionService) 
+        public ConsumptionController(IConsumptionService consumptionService)
         {
             _consumptionService = consumptionService;
         }
@@ -20,15 +20,16 @@ namespace HomeAccounting.Controllers
             return View(consumptions);
         }
 
+
         [HttpGet]
-        public  IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(ConsumptionDto consumption)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 await _consumptionService.AddAsync(consumption);
 
@@ -39,17 +40,18 @@ namespace HomeAccounting.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id) 
+        public async Task<IActionResult> Edit(int id)
         {
             var consumption = await _consumptionService.GetByIdAsync(id);
 
             return View(consumption);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(ConsumptionDto consumptionDto)
         {
-          
-            if (!ModelState.IsValid) 
+
+            if (!ModelState.IsValid)
             {
                 await _consumptionService.UpdateAsync(consumptionDto);
 
@@ -58,6 +60,7 @@ namespace HomeAccounting.Controllers
 
             return View(consumptionDto);
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -80,7 +83,7 @@ namespace HomeAccounting.Controllers
         }
 
         [HttpGet]
-        public IActionResult Balance() 
+        public IActionResult Balance()
         {
             return View();
         }
@@ -94,16 +97,17 @@ namespace HomeAccounting.Controllers
         [HttpPost]
         public async Task<IActionResult> BalanceForType(ConsumptionDto consumptionDto)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
-                
-                consumptionDto.List = await _consumptionService.GetFrequentConsumptionTypeByTimeAsync(consumptionDto.StartDate.Value,consumptionDto.EndDate.Value);
+
+                consumptionDto.List = await _consumptionService.GetFrequentConsumptionTypeByTimeAsync(consumptionDto.StartDate.Value, consumptionDto.EndDate.Value);
                 consumptionDto.FrequentByMonthList = await _consumptionService.GetFrequentConsumptionTypeByMonthAsync(consumptionDto.StartDate.Value.Month, consumptionDto.StartDate.Value.Year);
                 consumptionDto.FrequentByYearList = await _consumptionService.GetFrequentConsumptionTypeByYearAsync(consumptionDto.StartDate.Value.Year);
             }
 
             return View(consumptionDto);
         }
+
 
         [HttpGet]
         public IActionResult BalanceForMember()
@@ -113,7 +117,7 @@ namespace HomeAccounting.Controllers
         [HttpPost]
         public async Task<IActionResult> BalanceForMember(ConsumptionDto consumptionDto)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 consumptionDto.FrequentMembersByTime = await _consumptionService.GetMemberFrequentConsumptionByTimeAsync(consumptionDto.StartDate.Value, consumptionDto.EndDate.Value);
                 consumptionDto.FrequentMembersByMonth = await _consumptionService.GetMemberFrequentConsumptionByMonthAsync(consumptionDto.StartDate.Value.Month, consumptionDto.StartDate.Value.Year);
@@ -122,6 +126,7 @@ namespace HomeAccounting.Controllers
 
             return View(consumptionDto);
         }
+
 
         [HttpGet]
         public IActionResult BalanceDaysMax()

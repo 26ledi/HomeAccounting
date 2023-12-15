@@ -4,11 +4,6 @@ using HomeAccounting.BusinessLogic.Exceptions;
 using HomeAccounting.BusinessLogic.Services.Interfaces;
 using HomeAccounting.Data.Entities;
 using HomeAccounting.DataAccess.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeAccounting.BusinessLogic.Services.Implementations
 {
@@ -24,6 +19,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<SourceIncomeDto> AddAsync(SourceIncomeDto sourceIncomeDto)
         {
             var sourceIncomeLooked = _sourceIncomeRepository.GetSourceIncomeByIdAsync(sourceIncomeDto.Id);
+
             if (sourceIncomeLooked is not null)
             {
                 throw new AlreadyExistException("This Income Already Exists");
@@ -35,6 +31,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<SourceIncomeDto> DeleteAsync(int id)
         {
             var sourceIncomeLooked = _sourceIncomeRepository.GetSourceIncomeByIdAsync(id);
+
             if (sourceIncomeLooked is null)
             {
                 throw new NotFoundException("This income does not exist");
@@ -48,6 +45,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<List<SourceIncomeDto>> GetSourceIncomeAsync()
         {
             var sourceincomes = await _sourceIncomeRepository.GetAllSourceIncomeAsync();
+
             if (sourceincomes is null)
             {
                 throw new NotFoundException("There are not incomes");
@@ -58,6 +56,7 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<SourceIncomeDto> GetSourceIncomeDtoByIdAsync(int id)
         {
             var sourceincome = await _sourceIncomeRepository.GetSourceIncomeByIdAsync(id);
+
             if (sourceincome is null)
             {
                 throw new NotFoundException("This income does not exists");
@@ -68,10 +67,12 @@ namespace HomeAccounting.BusinessLogic.Services.Implementations
         public async Task<SourceIncomeDto> UpdateAsync(SourceIncomeDto sourceIncomeDto)
         {
             var sourceIncomeLooked = await _sourceIncomeRepository.GetSourceIncomeByIdAsync(sourceIncomeDto.Id);
+
             if (sourceIncomeLooked is null)
             {
                 throw new NotFoundException("This income does not exists");
             }
+
             _mapper.Map(sourceIncomeDto, sourceIncomeLooked);
             await _sourceIncomeRepository.UpdateAsync(sourceIncomeLooked);
 

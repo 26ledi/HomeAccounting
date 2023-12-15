@@ -1,13 +1,17 @@
 ﻿@model List<HomeAccounting.BusinessLogic.Dtos.FamilyDto>
 
 <h1>Family's List</h1>
-
+<input type="text" id="searchInput" placeholder="Search by name">
 <table>
     <thead>
 
         <tr>
             <th>Number</th>
             <th> Name</th>
+            @if(!User.IsInRole("Client"))
+            {
+                <th> Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -17,17 +21,57 @@
                 <td>@(i + 1)
                 <td>@Model[i].FamilyName</td>
 
-                <td>
-                    <a href="@Url.Action("Edit", "Family", new { id = Model[i].Id })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Family", new { id = Model[i].Id })">Delete</a>
-                </td>
+                    @if (!User.IsInRole("Client"))
+                    {
+                        <td>
+                            <a href="@Url.Action("Edit", "Family", new { id = Model[i].Id })">Edit</a> |
+                            <a href="@Url.Action("Delete", "Family", new { id = Model[i].Id })">Delete</a>
+                            
+                        </td>
+                    }
             </tr>
         }
     </tbody>
 </table>
-<a href="@Url.Action("Create", "Family")" class="btn btn-primary">Create</a>
-<a href="@Url.Action("Balance", "Family")" class="btn btn-success">Income Balance</a>
-<a href="@Url.Action("OverviewBalance", "Family")" class="btn btn-warning">Overview Balance</a>
+
+@if(!User.IsInRole("Client"))
+{
+    <a href="@Url.Action("Create", "Family")" class="btn btn-primary">Create</a>
+    <a href="@Url.Action("Balance", "Family")" class="btn btn-success">Income Balance</a>
+    <a href="@Url.Action("OverviewBalance", "Family")" class="btn btn-warning">Overview Balance</a>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sélection du champ de saisie
+        const searchInput = document.getElementById("searchInput");
+
+        // Écoutez les événements de saisie dans le champ
+        searchInput.addEventListener("input", function() {
+            // Obtenez la valeur saisie dans le champ
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // Sélectionnez toutes les lignes du tableau sauf la première (en-tête)
+            const rows = document.querySelectorAll("table tbody tr:not(:first-child)");
+
+            // Parcourez chaque ligne du tableau
+            rows.forEach(function(row) {
+                // Obtenez le nom de la famille dans chaque ligne
+                const familyName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+                // Vérifiez si le terme de recherche est présent dans le nom de la famille
+                if (familyName.includes(searchTerm)) {
+                    // Si le terme est trouvé, affichez la ligne
+                    row.style.display = "table-row";
+                } else {
+                    // Sinon, masquez la ligne
+                    row.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+
 
 
 

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IConsumptionRepository, ConsumptionRepository>();
 builder.Services.AddScoped<IConsumptionService, ConsumptionService>();
 builder.Services.AddScoped<IConsumptionTypeRepository, ConsumptionTypeRepository>();
 builder.Services.AddScoped<IConsumptionTypeService, ConsumptionTypeService>();
+builder.Services.AddMemoryCache();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 {

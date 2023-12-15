@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAccounting.Controllers
 {
-    [Authorize(Roles = "Admin")]
+
+    [Authorize]
     public class IncomeController : Controller
     {
         private readonly IIncomeService _incomeService;
@@ -20,8 +21,9 @@ namespace HomeAccounting.Controllers
 
             return View(incomes);
         }
+     
         [HttpGet]
-        public async Task<IActionResult> Create() 
+        public IActionResult Create() 
         {
             return View();
         }
@@ -35,6 +37,7 @@ namespace HomeAccounting.Controllers
             }
             return View(incomeDto);
         }
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -51,10 +54,12 @@ namespace HomeAccounting.Controllers
             }
             return View(incomeDto);
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var income = await _incomeService.GetIncomeDtoByIdAsync(id);
+
             return View(income);
         }
         [HttpPost]

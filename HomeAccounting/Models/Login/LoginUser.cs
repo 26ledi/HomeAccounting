@@ -6,9 +6,9 @@ namespace HomeAccounting.Models.Login
     public class LoginUser
     {
         [Required(ErrorMessage ="The email is required")]
-        public string Email { get; set; }
+        public string ?Email { get; set; }
 
         [Required(ErrorMessage = "The password is required")]
-        public string Password { get; set; }
+        public string ?Password { get; set; }
     }
 }
